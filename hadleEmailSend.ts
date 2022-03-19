@@ -2,7 +2,8 @@ import SGMail from '@sendgrid/mail';
 import 'dotenv/config';
 import { Request, Response } from 'express';
 
-SGMail.setApiKey(process.env.SENDGRID_API_KEY as string)
+SGMail.setApiKey(process.env.SENDGRID_API_KEY as string);
+
 const msg = {
   to: process.env.EMAIL as string,
   from: process.env.EMAIL_FROM as string,
