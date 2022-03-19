@@ -1,37 +1,21 @@
-import Nodemailer from 'nodemailer';
+import SGMail from '@sendgrid/mail';
 import 'dotenv/config';
 import { Request, Response } from 'express';
 
-async function main() {
-  // const testAccount = await Nodemailer.createTestAccount();
-
-  const transporter = Nodemailer.createTransport({
-    service: 'smtp.sendgrid.net',
-    port: 25,
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASS,
-    },
-  });
-
-  const info = await transporter.sendMail({
-    from: `"Fred Foo 👻" <${process.env.EMAIL}>`,
-    to: 'g_santanna@outlook.com',
-    subject: 'Hello ✔',
-    text: 'Hello world?',
-    html: '<b>Hello world?</b>',
-  });
-
-  console.log("Message sent: %s", info.messageId);
-
-  console.log("Preview URL: %s", Nodemailer.getTestMessageUrl(info));
-};
+SGMail.setApiKey(process.env.SENDGRID_API_KEY as string)
+const msg = {
+  to: process.env.EMAIL as string,
+  from: process.env.EMAIL_FROM as string,
+  subject: 'Sending with SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+}
 
 export default async function SendEmail(_req: Request, res: Response) {
   try {
-    await main();
+    await SGMail.send(msg);
     res.send('It\'s all right!');
   } catch (error) {
-    res.send('Error!');
+    res.send(`Error: ${error}`);
   }
 };
