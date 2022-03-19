@@ -6,7 +6,8 @@ async function main() {
   // const testAccount = await Nodemailer.createTestAccount();
 
   const transporter = Nodemailer.createTransport({
-    service: 'gmail',
+    service: 'smtp.sendgrid.net',
+    port: 25,
     auth: {
       user: process.env.EMAIL,
       pass: process.env.PASS,
