@@ -1,5 +1,6 @@
 import Nodemailer from 'nodemailer';
 import 'dotenv/config';
+import { Request, Response } from 'express';
 
 async function main() {
   // const testAccount = await Nodemailer.createTestAccount();
@@ -25,6 +26,11 @@ async function main() {
   console.log("Preview URL: %s", Nodemailer.getTestMessageUrl(info));
 };
 
-export default async function SendEmail() {
-  await main().catch(console.error);
+export default async function SendEmail(_req: Request, res: Response) {
+  try {
+    await main();
+    res.send('It\'s all right!');
+  } catch (error) {
+    res.send('Error!');
+  }
 };
