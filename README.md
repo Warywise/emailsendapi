@@ -20,6 +20,9 @@ Requisitos:
 - Nome, assunto e plain text com no mínimo 2(dois) caracteres;
 - HTML com no mínimo 9 caracteres `Ex: "<b>Oi</b>"`.
 
+#### Link do endpoint:
+| `https://emailsendnodeapi.herokuapp.com/`
+
 ## IMPORTANTE!
 _Por motivos obvios, o email provavelmente chegará na **caixa de spans** do destinatário._
 
