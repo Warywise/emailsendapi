@@ -10,6 +10,6 @@ app.use(express.json())
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/', SendEmail);
+app.post('/', SendEmail);
 
 app.listen(PORT, () => console.log(`Server is online in Port: ${PORT}`));
