@@ -1,11 +1,14 @@
-import SGMail from '@sendgrid/mail';
-import 'dotenv/config';
 import { Request, Response } from 'express';
+import SGMail from '@sendgrid/mail';
+
+import 'dotenv/config';
+
+import { EmailRequest } from './interfaces';
 
 SGMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
 const getEmailRequest = (
-  { email, sender_name, subject, text, html }
+  { email, sender_name, subject, text, html }: EmailRequest
 ) => ({
   to: email,
   from: `${sender_name} <${process.env.EMAIL_FROM}>`,
@@ -14,7 +17,10 @@ const getEmailRequest = (
   html,
 });
 
-export default async function SendEmail(_req: Request, res: Response) {
+export default async function SendEmail(req: Request, res: Response) {
+  const requestData: EmailRequest = req.body;
+  const msg = getEmailRequest(requestData);
+
   try {
     await SGMail.send(msg);
     res.status(200).send('It\'s all right!');
