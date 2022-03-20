@@ -4,19 +4,21 @@ import { Request, Response } from 'express';
 
 SGMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
-const msg = {
-  to: process.env.EMAIL as string,
-  from: process.env.EMAIL_FROM as string,
-  subject: 'Sending with SendGrid is Fun',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-}
+const getEmailRequest = (
+  { email, sender_name, subject, text, html }
+) => ({
+  to: email,
+  from: `${sender_name} <${process.env.EMAIL_FROM}>`,
+  subject,
+  text,
+  html,
+});
 
 export default async function SendEmail(_req: Request, res: Response) {
   try {
     await SGMail.send(msg);
-    res.send('It\'s all right!');
+    res.status(200).send('It\'s all right!');
   } catch (error) {
-    res.send(`Error: ${error}`);
+    res.status(500).json({ error });
   }
 };
