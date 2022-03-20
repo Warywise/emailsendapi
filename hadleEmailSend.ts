@@ -19,6 +19,11 @@ const getEmailRequest = (
 
 export default async function SendEmail(req: Request, res: Response) {
   const requestData: EmailRequest = req.body;
+
+  // if (requestData.secret !== process.env.SECRET) {
+  //   return res.status(511).json({ error: 'MISSING AUTH' });
+  // }
+
   const msg = getEmailRequest(requestData);
 
   try {

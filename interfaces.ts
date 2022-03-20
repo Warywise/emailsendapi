@@ -4,4 +4,5 @@ export interface EmailRequest {
   subject: string,
   text: string,
   html: string,
+  // secret: string,
 }
