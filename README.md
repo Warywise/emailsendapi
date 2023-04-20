@@ -21,7 +21,7 @@ Requisitos:
 - HTML com no mínimo 9 caracteres `Ex: "<b>Oi</b>"`.
 
 #### Link do endpoint:
-| `https://emailsendnodeapi.herokuapp.com/`
+| `https://emailsendapi.vercel.app/`
 
 ## IMPORTANTE!
 _Por motivos obvios, o email provavelmente chegará na **caixa de spans** do destinatário._
