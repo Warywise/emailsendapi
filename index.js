@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
-import SendEmail from './hadleEmailSend';
-import BodyValidator from './bodyValidator';
+import SendEmail from './hadleEmailSend.js';
+import BodyValidator from './bodyValidator.js';
 
 const app = express();
 
